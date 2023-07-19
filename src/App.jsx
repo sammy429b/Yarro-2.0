@@ -10,23 +10,32 @@ import Reset from "./pages/Reset"
 import Userprofile from "./pages/Userprofile"
 import Navbar from "./components/navbar"
 import { Route, Routes } from "react-router-dom"
+import { useContext } from "react";
+import AuthContext from "./context/AuthProvider"
 function App() {
-
+  const { auth } = useContext(AuthContext);
   return (
     <>
-    <Navbar/>
-      <Routes>
+      <Navbar auth={auth} />
 
-     <Route path="/" element={<Index/>}/>
-     <Route path="/test2" element={<Confirmemail/>}/> 
-     <Route path="/profile/edit" element={<Editprofile/>}/>
-     <Route path="/password/reset" element={<Forgotpass/>}/>
-     <Route path="/test" element={<Main/>}/>
-     <Route path="/register" element={<Register/>}/>
-     <Route path="/search" element={<Search/>}/>
-     <Route path="/reset" element={<Reset/>}/>
-     <Route path="/profile" element={<Userprofile/>}/>
-      </Routes>
+      {auth
+        ?// auth = true i.e user is logged in
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/profile" element={<Userprofile />} />
+          <Route path="/profile/edit" element={<Editprofile />} />
+        </Routes>
+        : // auth = false i.e user is not logged in
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/confirm" element={<Confirmemail />} />
+          <Route path="/reset" element={<Reset />} />
+          <Route path="/password/reset" element={<Forgotpass />} />
+        </Routes>
+      }
+
     </>
   )
 }
