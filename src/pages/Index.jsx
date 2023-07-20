@@ -45,6 +45,16 @@ const Index = () => {
             document.getElementById("pass").style.outlineWidth = "0px"
         })
 
+        document.getElementById("vis").addEventListener("click", (e) => {
+            if (document.getElementById("vis").innerText === 'visibility') {
+                document.getElementById("vis").innerHTML = "visibility_off"
+                document.getElementById("passwd").type = "text"
+            }
+            else {
+                document.getElementById("vis").innerHTML = "visibility"
+                document.getElementById("passwd").type = "password"
+            }
+        })
 
     }, [])
 
@@ -75,7 +85,7 @@ const Index = () => {
                                 <input
                                     className="h-10 border-none w-full outline-none group-data-[checked=true]:text-white group-data-[checked=true]:bg-[#3b4148]"
                                     type="password" name="passwd" placeholder="Password" id="passwd" />
-                                <label id="vis" className="material-symbols-outlined select-none hover:cursor-pointer" onClick={console.log("HI")}>
+                                <label id="vis" className="material-symbols-outlined select-none hover:cursor-pointer">
                                     visibility
                                 </label>
                             </div>
