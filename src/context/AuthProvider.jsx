@@ -5,20 +5,19 @@ const AuthContext = createContext(false);
 export function AuthProvider({ children }) {
     const [auth, setAuth] = useState(false);
     try {
-        const fetchPromise = fetch('https://localhost:3000/api/login', {
-            method: 'PUT',
+        const response = fetch('http://localhost:3000/api/login', {
+            method: 'GET',
             mode: 'cors',
             'credentials': 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
-        });
+        }).then((response) => response.json())
 
-        fetchPromise.then(response => {
-            if (response.status === 200)
-                setAuth(true);
-        });
+        const status = response.status;
+        if (status === "success")
+            setAuth(true);
     }
     catch (err) {
         console.log(err);
