@@ -2,7 +2,7 @@ export default function Navbar({ login }) {
 
     const link = [{ "name": "Home", "icon": "home", "link": "/" },
     { "name": "Search", "icon": "search", "link": "/search" }]
-    
+
     const nav_links = link.map((link) =>
         <a key={link.name} href={link.link} className="hover:cursor-pointer group-data-[checked=true]:text-white">
             <p className="material-symbols-outlined pt-4 mx-2 text-2xl select-none" id="homebtn">{link.icon}</p>

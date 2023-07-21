@@ -1,7 +1,9 @@
 import { useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
+import { useSnackbar } from "notistack";
 const Index = () => {
     const { setAuth } = useContext(AuthContext);
+    const { enqueueSnackbar } = useSnackbar();
 
     const LoginForm = async function (e) {
         e.preventDefault();
@@ -9,24 +11,35 @@ const Index = () => {
         const data = Object.fromEntries(form.entries());
         console.log(data)
         try {
-            const response = fetch("http://localhost:3000/api/login", {
+            const response = await fetch("http://localhost:3000/api/login", {
                 method: 'POST',
                 mode: 'cors',
-                'credentials': 'include',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     "Authorization": "Basic " + btoa(data["uname"] + ":" + data["passwd"])
                 }
-            }).then((response) => response.json())
+            });
 
-            let status = response.status;
+            const responseData = await response.json();
+
+            const status = responseData.status;
+            console.log(responseData)
             if (status === "success") {
-                setAuth({ login: true, uid: response.uid, uname: response.uname });
+                setAuth({ login: true, uid: responseData.uid, uname: responseData.uname });
                 window.location.reload()
             }
             else {
-                Snackbar.show({ pos: "bottom-center", text: response.status })
+                console.log(status)
+                enqueueSnackbar(status, {
+                    variant: 'error',
+                    sx: {
+                        "& .SnackbarContent-root": {
+                            width: 100,
+                            fontSize: 16
+                        }
+                    }
+                })
             }
         }
         catch (err) {
