@@ -1,24 +1,23 @@
 import { createContext, useState } from "react";
 
-const AuthContext = createContext(false);
+const AuthContext = createContext({ login: false, uid: '', uname: '' });
 
 export function AuthProvider({ children }) {
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState({ login: false, uid: '', uname: '' });
     try {
-        const fetchPromise = fetch('https://localhost:3000/api/login', {
-            method: 'PUT',
+        const response = fetch('http://localhost:3000/api/login', {
+            method: 'GET',
             mode: 'cors',
-            'credentials': 'include',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
-        });
+        }).then((response) => response.json())
 
-        fetchPromise.then(response => {
-            if (response.status === 200)
-                setAuth(true);
-        });
+        const status = response.status;
+        // uid and uname
+        if (status === "success")
+            setAuth({ login: true });
     }
     catch (err) {
         console.log(err);

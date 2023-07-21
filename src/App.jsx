@@ -14,11 +14,12 @@ import { useContext } from "react";
 import AuthContext from "./context/AuthProvider"
 function App() {
   const { auth } = useContext(AuthContext);
+
   return (
     <>
-      <Navbar auth={auth} />
+      <Navbar login={auth.login} />
 
-      {auth
+      {auth.login
         ?// auth = true i.e user is logged in
         <Routes>
           <Route path="/" element={<Main />} />
