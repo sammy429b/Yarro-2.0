@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-const AuthContext = createContext(false);
+const AuthContext = createContext({ login: false, uid: '', uname: '' });
 
 export function AuthProvider({ children }) {
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState({ login: true, uid: '', uname: '' });
     try {
         const response = fetch('http://localhost:3000/api/login', {
             method: 'GET',
@@ -16,8 +16,9 @@ export function AuthProvider({ children }) {
         }).then((response) => response.json())
 
         const status = response.status;
+        // uid and uname
         if (status === "success")
-            setAuth(true);
+            setAuth({ login: true });
     }
     catch (err) {
         console.log(err);

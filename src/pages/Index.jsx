@@ -22,9 +22,7 @@ const Index = () => {
 
             let status = response.status;
             if (status === "success") {
-                localStorage.setItem("uname", response.uname);
-                localStorage.setItem("uid", response.uid);
-                setAuth(true);
+                setAuth({ login: true, uid: response.uid, uname: response.uname });
                 window.location.reload()
             }
             else {
