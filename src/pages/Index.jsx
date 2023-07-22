@@ -2,73 +2,72 @@ import { useEffect, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useSnackbar } from "notistack";
 const Index = () => {
-  
   const { setAuth } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
 
   const LoginForm = async function (e) {
-      e.preventDefault();
-      const form = new FormData(e.target);
-      const data = Object.fromEntries(form.entries());
-      console.log(data)
-      try {
-          const response = await fetch("http://localhost:3000/api/login", {
-              method: 'POST',
-              mode: 'cors',
-              headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  "Authorization": "Basic " + btoa(data["uname"] + ":" + data["passwd"])
-              }
-          });
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const data = Object.fromEntries(form.entries());
+    console.log(data);
+    try {
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(data["uname"] + ":" + data["passwd"]),
+        },
+      });
 
-          const responseData = await response.json();
+      const responseData = await response.json();
 
-          const status = responseData.status;
-          console.log(responseData)
-          if (status === "success") {
-              setAuth({ login: true, uid: responseData.uid, uname: responseData.uname });
-              window.location.reload()
-          }
-          else {
-              console.log(status)
-              enqueueSnackbar(status, {
-                  variant: 'error',
-                  sx: {
-                      "& .SnackbarContent-root": {
-                          width: 100,
-                          fontSize: 16
-                      }
-                  }
-              })
-          }
+      const status = responseData.status;
+      console.log(responseData);
+      if (status === "success") {
+        setAuth({
+          login: true,
+          uid: responseData.uid,
+          uname: responseData.uname,
+        });
+        window.location.reload();
+      } else {
+        console.log(status);
+        enqueueSnackbar(status, {
+          variant: "error",
+          sx: {
+            "& .SnackbarContent-root": {
+              width: 100,
+              fontSize: 16,
+            },
+          },
+        });
       }
-      catch (err) {
-          console.log(err);
-      }
-  }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-      document.getElementById("passwd").addEventListener("focusin", (e) => {
-          document.getElementById("pass").style.outlineWidth = "2px"
-      })
+    document.getElementById("passwd").addEventListener("focusin", (e) => {
+      document.getElementById("pass").style.outlineWidth = "2px";
+    });
 
-      document.getElementById("passwd").addEventListener("focusout", (e) => {
-          document.getElementById("pass").style.outlineWidth = "0px"
-      })
+    document.getElementById("passwd").addEventListener("focusout", (e) => {
+      document.getElementById("pass").style.outlineWidth = "0px";
+    });
 
-      document.getElementById("vis").addEventListener("click", (e) => {
-          if (document.getElementById("vis").innerText === 'visibility') {
-              document.getElementById("vis").innerHTML = "visibility_off"
-              document.getElementById("passwd").type = "text"
-          }
-          else {
-              document.getElementById("vis").innerHTML = "visibility"
-              document.getElementById("passwd").type = "password"
-          }
-      })
-
-  }, [])
+    document.getElementById("vis").addEventListener("click", (e) => {
+      if (document.getElementById("vis").innerText === "visibility") {
+        document.getElementById("vis").innerHTML = "visibility_off";
+        document.getElementById("passwd").type = "text";
+      } else {
+        document.getElementById("vis").innerHTML = "visibility";
+        document.getElementById("passwd").type = "password";
+      }
+    });
+  }, []);
   return (
     <>
       <main className="mt-2 h-[40.5rem] lg:w-full lg:h-[41rem] bg-[#FAFAFA]">
@@ -93,7 +92,7 @@ const Index = () => {
           >
             <form
               id="login_form"
-              className=" bg-white rounded-[1.5rem] flex gap-y-2 flex-col w-[30rem] lg:w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 group-data-[checked=true]:bg-black"
+              className=" shadow-2xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col w-[30rem] lg:w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 group-data-[checked=true]:bg-black"
             >
               <div className="phrase-container flex justify-center">
                 <p className="phrase text-3xl font-semibold text-center py-4 group-data-[checked=true]:text-white">
@@ -153,7 +152,5 @@ const Index = () => {
     </>
   );
 };
-
-
 
 export default Index;
