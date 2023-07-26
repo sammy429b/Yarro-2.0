@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Editprofile = () => {
     return (
@@ -8,8 +7,8 @@ const Editprofile = () => {
 
                     <div className="user_profile flex flex-col items-center">
                         <img src="" alt="" id="user_image" className=" min-w-[120px] max-w-[120px] h-[120px] rounded-full" />
-                        <form id="image_form" method="POST" enctype="multipart/form-data" action="/sendimage">
-                            <label for="image_upload" className="cursor-pointer">change profile picture</label>
+                        <form id="image_form" method="POST" encType="multipart/form-data" action="/sendimage">
+                            <label htmlFor="image_upload" className="cursor-pointer">change profile picture</label>
                             <input type="file" id="image_upload" name="image" accept="image/*" className="w-0 h-0" />
                         </form>
                         <p id="username" className="font-medium text-xl "></p>
