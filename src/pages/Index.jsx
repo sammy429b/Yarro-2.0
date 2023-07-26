@@ -80,8 +80,8 @@ const Index = () => {
             className="lg:w-1/2 lg:h-[40rem] lg:flex lg:items-center lg:justify-center hidden className="
           >
             <img
-              className="w-[30rem]"
-              src="images/landing_image.svg"
+              className="w-[30rem] mix-blend-multiply"
+              src="images/connect.jpg"
               alt="someimage"
             />
           </div>

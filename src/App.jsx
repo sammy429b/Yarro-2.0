@@ -3,21 +3,23 @@ import Confirmemail from "./pages/Confirmemail"
 import Editprofile from "./pages/Editprofile"
 import Main from "./pages/Main"
 import Forgotpass from "./pages/Forgotpass"
-
 import Register from "./pages/Register"
 import Search from "./pages/Search"
 import Reset from "./pages/Reset"
 import Userprofile from "./pages/Userprofile"
 import Navbar from "./components/navbar"
+import Nav from "./components/Nav"
 import { Route, Routes } from "react-router-dom"
 import { useContext } from "react";
 import AuthContext from "./context/AuthProvider"
+import NewIndex from "./pages/NewIndex"
 function App() {
   const { auth } = useContext(AuthContext);
 
   return (
     <>
-      <Navbar login={auth.login} />
+      {/* <Navbar login={auth.login} /> */}
+      <Nav/>
 
       {auth.login
         ?// auth = true i.e user is logged in
@@ -29,7 +31,7 @@ function App() {
         </Routes>
         : // auth = false i.e user is not logged in
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<NewIndex />} />
           <Route path="/register" element={<Register />} />
           <Route path="/confirm" element={<Confirmemail />} />
           <Route path="/reset" element={<Reset />} />
