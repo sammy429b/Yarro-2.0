@@ -1,4 +1,4 @@
-import Index from "./pages/Index"
+// import Index from "./pages/Index"
 import Confirmemail from "./pages/Confirmemail"
 import Editprofile from "./pages/Editprofile"
 import Main from "./pages/Main"
@@ -7,12 +7,13 @@ import Register from "./pages/Register"
 import Search from "./pages/Search"
 import Reset from "./pages/Reset"
 import Userprofile from "./pages/Userprofile"
-import Navbar from "./components/navbar"
+// import Navbar from "./components/navbar"
 import Nav from "./components/Nav"
 import { Route, Routes } from "react-router-dom"
 import { useContext } from "react";
 import AuthContext from "./context/AuthProvider"
 import NewIndex from "./pages/NewIndex"
+import Login from "./pages/Login"
 function App() {
   const { auth } = useContext(AuthContext);
 
@@ -32,6 +33,7 @@ function App() {
         : // auth = false i.e user is not logged in
         <Routes>
           <Route path="/" element={<NewIndex />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/confirm" element={<Confirmemail />} />
           <Route path="/reset" element={<Reset />} />
