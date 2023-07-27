@@ -9,7 +9,7 @@ const Nav = () => {
         </div>
         <div id="Nav-btns" className="flex justify-center gap-x-4 items-center  w-[16rem] h-[4rem] ">
             <button className="w-[10rem] h-[2.6rem] bg-purple-600 text-white rounded px-2">Log In</button>
-            <button className="w-[10rem] h-[2.6rem] bg-purple-600 text-white rounded px-2">Sign Up</button>
+            <button className="w-[10rem] h-[2.6rem] text-purple-600 border-purple-500 border-2 rounded px-2">Sign Up</button>
             <div>
             <label htmlFor="theme" className="">
                     <span id="theme_button"

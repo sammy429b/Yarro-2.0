@@ -22,7 +22,7 @@ function App() {
       {/* <Navbar login={auth.login} /> */}
       <Nav/>
 
-      {auth.login
+      {!auth.login
         ?// auth = true i.e user is logged in
         <Routes>
           <Route path="/" element={<Main />} />
