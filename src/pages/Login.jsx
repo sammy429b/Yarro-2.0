@@ -4,7 +4,7 @@ const Login = () => {
         <>
             <div
                 id="form-container"
-                className="className= lg:w-1/2 lg:h-[40rem] rounded-[3rem] flex items-center justify-center px-8 py-[70px] border-black group-data-[checked=true]:bg-black group-data-[checked=true]:border-gray-900"
+                className="className= full lg:h-[40rem] rounded-[3rem] flex items-center justify-center px-8 py-[70px] border-black group-data-[checked=true]:bg-black group-data-[checked=true]:border-gray-900"
             >
                 <form
                     id="login_form"
@@ -49,7 +49,7 @@ const Login = () => {
                         Forgot password
                     </a>
                     <input
-                        className="mt-[20px] rounded-full h-[40px] text-white text-m bg-blue-700 hover:bg-blue-600 duration-200 hover:cursor-pointer "
+                        className="mt-[20px] mx-2 rounded-full h-[40px] text-white text-m bg-purple-600 hover:bg-purple-700 duration-200 hover:cursor-pointer "
                         type="submit"
                         name="login_btn"
                         id="login_btn"
