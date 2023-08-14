@@ -20,7 +20,7 @@ const Forgotpass = () => {
                             <input
                                 className="my-1 w-[29rem] rounded-full h-[40px] text-white text-m bg-[#7034E4] hover:bg-blue-600 duration-300 hover:cursor-pointer disabled:bg-gray-900 mb-4"
                                 type="submit" name="reset" id="resetButton" value="Request" />
-                            <a href="/"
+                            <a href="/login"
                                 className="underline-animation flex justify-center mt-2 group-data-[checked=true]:text-white hover:underline duration-300 translate-y-1 hover:translate-y-0">
                                 Login instead?
                             </a>

@@ -1,28 +1,28 @@
-// import Index from "./pages/Index"
-import Confirmemail from "./pages/Confirmemail"
-import Editprofile from "./pages/Editprofile"
+import Index from "./pages/Index"
+import Confirmemail from "./pages/ConfirmEmail"
+import Editprofile from "./pages/EditProfile"
 import Main from "./pages/Main"
-import Forgotpass from "./pages/Forgotpass"
+import Forgotpass from "./pages/ForgotPassword"
 import Register from "./pages/Register"
 import Search from "./pages/Search"
-import Reset from "./pages/Reset"
-import Userprofile from "./pages/Userprofile"
-// import Navbar from "./components/navbar"
-import Nav from "./components/Nav"
+import Reset from "./pages/ResetPassword"
+import Userprofile from "./pages/UserProfile" 
+import Navbar from "./components/navbar"
+import Login from "./pages/Login"
+
 import { Route, Routes } from "react-router-dom"
 import { useContext } from "react";
 import AuthContext from "./context/AuthProvider"
-import NewIndex from "./pages/NewIndex"
-import Login from "./pages/Login"
+
 function App() {
   const { auth } = useContext(AuthContext);
 
   return (
     <>
-      {/* <Navbar login={auth.login} /> */}
-      <Nav/>
 
-      {!auth.login
+      <Navbar login={auth.login} />
+
+      {auth.login
         ?// auth = true i.e user is logged in
         <Routes>
           <Route path="/" element={<Main />} />
@@ -32,7 +32,7 @@ function App() {
         </Routes>
         : // auth = false i.e user is not logged in
         <Routes>
-          <Route path="/" element={<NewIndex />} />
+          <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/confirm" element={<Confirmemail />} />

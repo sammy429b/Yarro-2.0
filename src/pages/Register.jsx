@@ -81,13 +81,13 @@ const Register = () => {
                             <input
                                 className="w-[27rem] lg:w-[29rem] mt-2 rounded-full h-10 text-white flex items-center justify-center bg-[#7034E4] hover:bg-blue-700 duration-300 hover:cursor-pointer disabled:bg-gray-900"
                                 type="submit" name="reg" id="reg" value="Register" />
-                            <a href="/"
+                            <a href="/login"
                                 className="underline-animation flex justify-center mt-4 group-data-[checked=true]:text-white hover:underline duration-300 translate-y-1 hover:translate-y-0">
                                 Login instead?
                             </a>
                         </form>
                     </div>
- 
+
                     <div id="image-container" className="w-1/2 hidden lg:flex items-center justify-center">
                         <img src="images/reg.png" alt="someimg" className="w-[35.5rem] " />
                     </div>
