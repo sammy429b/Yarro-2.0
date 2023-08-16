@@ -10,17 +10,26 @@ import Userprofile from "./pages/Userprofile"
 // import Navbar from "./components/navbar"
 import Nav from "./components/Nav"
 import { Route, Routes } from "react-router-dom"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "./context/AuthProvider"
 import NewIndex from "./pages/NewIndex"
 import Login from "./pages/Login"
 function App() {
   const { auth } = useContext(AuthContext);
 
+  const [theme,setTheme] = useState(localStorage.getItem("theme") == "true"?true:false)
+
+  const toggleTheme = () => {
+      setTheme(!theme)
+      localStorage.setItem("theme",!theme)
+  }
+
   return (
-    <>
+    <div className={
+      theme ? "dark":""
+    }>
       {/* <Navbar login={auth.login} /> */}
-      <Nav/>
+      <Nav theme={theme} toggleTheme={toggleTheme}/>
 
       {auth.login
         ?// auth = true i.e user is logged in
@@ -41,7 +50,7 @@ function App() {
         </Routes>
       }
 
-    </>
+    </div>
   )
 }
 
