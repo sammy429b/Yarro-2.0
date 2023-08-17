@@ -1,6 +1,7 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext,useState } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useSnackbar } from "notistack";
+import { Link } from "react-router-dom";
 const Login = () => {
 
     const { setAuth } = useContext(AuthContext);
@@ -52,25 +53,6 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {
-        document.getElementById("passwd").addEventListener("focusin", (e) => {
-            document.getElementById("pass").style.outlineWidth = "2px";
-        });
-
-        document.getElementById("passwd").addEventListener("focusout", (e) => {
-            document.getElementById("pass").style.outlineWidth = "0px";
-        });
-
-        document.getElementById("vis").addEventListener("click", (e) => {
-            if (document.getElementById("vis").innerText === "visibility") {
-                document.getElementById("vis").innerHTML = "visibility_off";
-                document.getElementById("passwd").type = "text";
-            } else {
-                document.getElementById("vis").innerHTML = "visibility";
-                document.getElementById("passwd").type = "password";
-            }
-        });
-    }, []);
 
     return (
         <>
@@ -80,7 +62,7 @@ const Login = () => {
             >
                 <form
                     id="login_form"
-                    className=" shadow-2xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col w-[30rem] lg:w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 dark:bg-gray-800"
+                    className=" shadow-2xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col lg:w-[36rem] w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 dark:bg-gray-800"
                     onSubmit={LoginForm}
                 >
                     <div className="phrase-container flex justify-center">
@@ -114,12 +96,12 @@ const Login = () => {
                            {visible?"visibility_off":"visibility"}
                         </label>
                     </div>
-                    <a
-                        href="/password/reset"
+                    <Link
+                        to="/password/reset"
                         className="forgot-text w-full flex text-sm px-4 justify-end hover:underline underline-offset-1 text-black dark:text-white"
                     >
                         Forgot password
-                    </a>
+                    </Link>
                     <input
                         className="mt-[20px] mx-2 rounded-full h-[40px] text-white text-m bg-purple-600 hover:bg-purple-700 duration-200 hover:cursor-pointer "
                         type="submit"

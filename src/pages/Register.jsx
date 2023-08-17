@@ -59,11 +59,11 @@ const Register = () => {
             <main className="h-[100vh] items-start pt-36 flex justify-center bg-white dark:bg-gray-900">
                 <div className=" flex flex-row justify-center items-center">
                     <div id="form-container"
-                        className="w-full rounded-[3rem] px-16  py-8 flex items-center justify-center border-white bg-white shadow-xl dark:bg-gray-800">
+                        className="rounded-[3rem] lg:w-[36rem] w-[32rem] flex items-center justify-center border-white bg-white shadow-xl dark:bg-gray-800">
                         <form id="reg_form" onSubmit={onRegister}
                             className=" rounded-[1.5rem] flex items-center flex-col gap-y-4 transition-[width] bg-white duration-500 dark:bg-gray-800">
                             <div id="phrase-container" className=" flex my-6">
-                                <p className="phrase text-2xl font-semibold text-black dark:text-white">
+                                <p className="phrase text-3xl py-4 font-semibold text-black dark:text-white">
                                     Create New Account
                                 </p>
                             </div>
