@@ -88,7 +88,7 @@ const Register = () => {
                             </Link>
                         </form>
                     </div>
- 
+
                     <div id="image-container" className="w-1/2 hidden lg:flex items-center justify-center">
                         <img src="images/reg.png" alt="someimg" className="w-[35.5rem] " />
                     </div>

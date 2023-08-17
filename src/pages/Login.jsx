@@ -1,9 +1,76 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-
+import { useEffect, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
+import { useSnackbar } from "notistack";
 const Login = () => {
 
+    const { setAuth } = useContext(AuthContext);
+    const { enqueueSnackbar } = useSnackbar();
     const [visible,setVisible] = useState(false)
+
+
+    const LoginForm = async function (e) {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        const data = Object.fromEntries(form.entries());
+        console.log(data);
+        try {
+            const response = await fetch("http://localhost:3000/api/login", {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: "Basic " + btoa(data["uname"] + ":" + data["passwd"]),
+                },
+            });
+
+            const responseData = await response.json();
+
+            const status = responseData.status;
+            console.log(responseData);
+            if (status === "success") {
+                setAuth({
+                    login: true,
+                    uid: responseData.uid,
+                    uname: responseData.uname,
+                });
+                window.location.reload();
+            } else {
+                console.log(status);
+                enqueueSnackbar(status, {
+                    variant: "error",
+                    sx: {
+                        "& .SnackbarContent-root": {
+                            width: 100,
+                            fontSize: 16,
+                        },
+                    },
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        document.getElementById("passwd").addEventListener("focusin", (e) => {
+            document.getElementById("pass").style.outlineWidth = "2px";
+        });
+
+        document.getElementById("passwd").addEventListener("focusout", (e) => {
+            document.getElementById("pass").style.outlineWidth = "0px";
+        });
+
+        document.getElementById("vis").addEventListener("click", (e) => {
+            if (document.getElementById("vis").innerText === "visibility") {
+                document.getElementById("vis").innerHTML = "visibility_off";
+                document.getElementById("passwd").type = "text";
+            } else {
+                document.getElementById("vis").innerHTML = "visibility";
+                document.getElementById("passwd").type = "password";
+            }
+        });
+    }, []);
 
     return (
         <>
@@ -14,6 +81,7 @@ const Login = () => {
                 <form
                     id="login_form"
                     className=" shadow-2xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col w-[30rem] lg:w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 dark:bg-gray-800"
+                    onSubmit={LoginForm}
                 >
                     <div className="phrase-container flex justify-center">
                         <p className="phrase text-3xl font-semibold text-center py-4 text-black dark:text-white">
@@ -53,7 +121,7 @@ const Login = () => {
                         Forgot password
                     </a>
                     <input
-                        className="mt-[20px] rounded-full h-[40px] text-white text-m bg-blue-700 hover:bg-blue-600 duration-200 hover:cursor-pointer "
+                        className="mt-[20px] mx-2 rounded-full h-[40px] text-white text-m bg-purple-600 hover:bg-purple-700 duration-200 hover:cursor-pointer "
                         type="submit"
                         name="login_btn"
                         id="login_btn"
