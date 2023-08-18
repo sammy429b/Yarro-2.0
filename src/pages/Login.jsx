@@ -1,13 +1,13 @@
-import { useEffect, useContext,useState } from "react";
+import {useContext,useState } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useSnackbar } from "notistack";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
 
-    const { setAuth } = useContext(AuthContext);
+    const { auth,setAuth } = useContext(AuthContext);
     const { enqueueSnackbar } = useSnackbar();
     const [visible,setVisible] = useState(false)
-
+    const navigate = useNavigate()
 
     const LoginForm = async function (e) {
         e.preventDefault();
@@ -15,9 +15,10 @@ const Login = () => {
         const data = Object.fromEntries(form.entries());
         console.log(data);
         try {
-            const response = await fetch("http://localhost:3000/api/login", {
+            const response = await fetch(`${auth.url}/api/login`, {
                 method: "POST",
                 mode: "cors",
+                credentials:"include",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -31,11 +32,12 @@ const Login = () => {
             console.log(responseData);
             if (status === "success") {
                 setAuth({
+                    ...auth,
                     login: true,
                     uid: responseData.uid,
                     uname: responseData.uname,
                 });
-                window.location.reload();
+                navigate("/")
             } else {
                 console.log(status);
                 enqueueSnackbar(status, {
