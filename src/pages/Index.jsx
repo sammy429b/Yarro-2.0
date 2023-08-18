@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {Typewriter} from 'react-simple-typewriter'
 
 const NewIndex = () => {
@@ -17,7 +18,7 @@ const NewIndex = () => {
           The Simple way to connect and look back on moments forever.
         </p>
 
-        <button className='mt-2 w-[8rem] h-[3rem] rounded text-white bg-purple-600'>Get Started</button>
+        <Link to="/register"><button className='mt-2 w-[8rem] h-[3rem] rounded text-white bg-purple-600'>Get Started</button></Link>
         </div>
 
         <div id='rightConatiner' className='w-full lg:w-1/2 h-[30rem] lg:h-[40.6rem]'>

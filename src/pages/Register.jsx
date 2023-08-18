@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const Register = () => {
-    const { setAuth } = useContext(AuthContext);
+    const { auth,setAuth } = useContext(AuthContext);
     const { enqueueSnackbar } = useSnackbar();
 
     const onRegister = async function (e) {
@@ -17,9 +17,10 @@ const Register = () => {
 
         if (senddata["passwd1"] === senddata["passwd2"]) {
             try {
-                const response = await fetch('http://localhost:3000/api/register', {
+                const response = await fetch(`${auth.url}/api/register`, {
                     mode: 'cors',
                     method: 'POST',
+                    credentials:"include",
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
@@ -83,7 +84,7 @@ const Register = () => {
                                 className="w-[27rem] lg:w-[29rem] mt-2 rounded-full h-10 text-white flex items-center justify-center bg-[#7034E4] hover:bg-blue-700 duration-300 hover:cursor-pointer disabled:bg-gray-900"
                                 type="submit" name="reg" id="reg" value="Register" />
                             <Link to="/"
-                                className="underline-animation flex justify-center mt-4 dark:text-white text-black hover:underline duration-300 translate-y-1 hover:translate-y-0">
+                                className="underline-animation pb-4 flex justify-center mt-4 dark:text-white text-black hover:underline duration-300 translate-y-1 hover:translate-y-0">
                                 Login instead?
                             </Link>
                         </form>
