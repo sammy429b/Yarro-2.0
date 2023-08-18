@@ -10,6 +10,7 @@ const Login = () => {
     const navigate = useNavigate()
 
     const LoginForm = async function (e) {
+        document.getElementById("login_btn").setAttribute("disabled","") // 
         e.preventDefault();
         const form = new FormData(e.target);
         const data = Object.fromEntries(form.entries());
@@ -52,7 +53,17 @@ const Login = () => {
             }
         } catch (err) {
             console.log(err);
+                enqueueSnackbar("network error", {
+                    variant: "error",
+                    sx: {
+                        "& .SnackbarContent-root": {
+                            width: 100,
+                            fontSize: 16,
+                        },
+                    },
+                });
         }
+        document.getElementById("login_btn").removeAttribute("disabled") // 
     };
 
 
@@ -105,7 +116,7 @@ const Login = () => {
                         Forgot password
                     </Link>
                     <input
-                        className="mt-[20px] mx-2 rounded-full h-[40px] text-white text-m bg-purple-600 hover:bg-purple-700 duration-200 hover:cursor-pointer "
+                        className="mt-[20px] mx-2 rounded-full h-[40px] text-white text-m bg-purple-600 hover:bg-purple-700 duration-200 hover:cursor-pointer disabled:bg-gray-500"
                         type="submit"
                         name="login_btn"
                         id="login_btn"

@@ -6,7 +6,7 @@ import Forgotpass from "./pages/ForgotPassword"
 import Register from "./pages/Register"
 import Search from "./pages/Search"
 import Reset from "./pages/ResetPassword"
-import Userprofile from "./pages/Userprofile" 
+import Userprofile from "./pages/Userprofile"
 import Navbar from "./components/navbar"
 import Login from "./pages/Login"
 
@@ -29,7 +29,7 @@ function App() {
       theme ? "dark":""
     }>
       {/* <Navbar login={auth.login} /> */}
-      <Navbar login={auth.login} theme={theme} toggleTheme={toggleTheme}/>
+      <Navbar theme={theme} toggleTheme={toggleTheme}/>
 
       {auth.login
         ?// auth = true i.e user is logged in
