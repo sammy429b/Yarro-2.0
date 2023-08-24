@@ -34,10 +34,10 @@ const Navbar = ({ theme,toggleTheme }) => {
     return (
         <>
             <div id="Nav" className="w-full bg-[#EDF4F6] h-[5rem] text-black flex items-center justify-between dark:bg-gray-800">
-                <div id="Logo" className="flex gap-x-1 items-center ml-4 text-2xl font-medium font-sans">
+                <Link to={'/'} id="Logo" className="flex gap-x-1 items-center ml-4 text-2xl font-medium font-sans">
                     <img src="images/logo.png" alt="" className="w-[2rem]" />
                     <h1 className="text-black dark:text-white">Yarro</h1>
-                </div>
+                </Link>
                 {auth.login &&
                     <div className="flex gap-x-8">
                         {

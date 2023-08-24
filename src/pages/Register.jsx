@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 
 const Register = () => {
-    const { auth,setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
     const { enqueueSnackbar } = useSnackbar();
 
     const onRegister = async function (e) {
@@ -17,10 +17,10 @@ const Register = () => {
 
         if (senddata["passwd1"] === senddata["passwd2"]) {
             try {
-                const response = await fetch(`${auth.url}/api/register`, {
+                const response = await fetch(`${import.meta.env.VITE_SERVER}/api/register`, {
                     mode: 'cors',
                     method: 'POST',
-                    credentials:"include",
+                    credentials: "include",
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
@@ -32,7 +32,7 @@ const Register = () => {
 
                 if (resData.status === "success") {
                     setAuth({ login: true, uid: resData.uid, uname: senddata["uname"] });
-                    window.location.href = '/'
+                    window.location.href = '/confirm'
                 }
                 else {
                     enqueueSnackbar(resData.status, {
@@ -57,7 +57,7 @@ const Register = () => {
 
     return (
         <>
-            <main className="h-[100vh] items-start pt-36 flex justify-center bg-white dark:bg-gray-900">
+            <main className="h-[100vh] items-start pt-16 flex justify-center bg-white dark:bg-gray-900">
                 <div className=" flex flex-row justify-center items-center">
                     <div id="form-container"
                         className="rounded-[3rem] lg:w-[36rem] w-[32rem] flex items-center justify-center border-white bg-white shadow-xl dark:bg-gray-800">
@@ -83,7 +83,7 @@ const Register = () => {
                             <input
                                 className="w-[27rem] lg:w-[29rem] mt-2 rounded-full h-10 text-white flex items-center justify-center bg-[#7034E4] hover:bg-blue-700 duration-300 hover:cursor-pointer disabled:bg-gray-900"
                                 type="submit" name="reg" id="reg" value="Register" />
-                            <Link to="/"
+                            <Link to="/login"
                                 className="underline-animation pb-4 flex justify-center mt-4 dark:text-white text-black hover:underline duration-300 translate-y-1 hover:translate-y-0">
                                 Login instead?
                             </Link>
