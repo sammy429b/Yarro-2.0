@@ -3,5 +3,5 @@
 ## .ENV
 
 File contains following variables
-1. VITE_SERVER="Your backend server root address"
+1. VITE_SERVER="Your backend server root address"\n
    eg: VITE_SERVER="http://localhost:3000"
