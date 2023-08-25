@@ -49,7 +49,7 @@ const Navbar = ({ theme,toggleTheme }) => {
                     {auth.login ?
                         <div className="relative inline-block group/nav ">
                             <div className="profile-container pt-4 pr-8 min-w-[50px] max-w-[50px] min-h-[50px] mr-4">
-                                <img id="profile-img" src="" alt="pfp" className="min-w-[50px] h-[50px] rounded-full select-none" />
+                                <img id="profile-img" src={`${auth.url}/image/${auth.uid}`} alt="pfp" className="min-w-[50px] h-[50px] rounded-full select-none" />
                             </div>
                             <div
                                 className="navs group-hover/nav:block absolute hidden w-36 right-1 z-1 shadow-xl group-data-[checked=true]:text-white">

@@ -1,55 +1,139 @@
+import { useContext, useEffect, useState } from "react"
+import AuthContext from "../context/AuthProvider"
+import thumb_up_off from "../assets/thumb_up_off.svg"
+import thumb_up from "../assets/thumb_up.svg"
+import thumb_down from "../assets/thumb_down.svg"
+import thumb_down_off from "../assets/thumb_down_off.svg"
+import BasicModal from "../components/PostModal"
+
+
 const Main = () => {
+
+    const [posts,setPosts] = useState([])
+    const {auth} = useContext(AuthContext)
+
+    const [open, setOpen] = useState(false);
+
+
+
+
+    const getPosts = async () => {
+        const response = await fetch(`${auth.url}/api/posts?page=0`, {
+            method: "GET",
+            mode: "cors",
+            credentials:"include",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json()
+        if(data.status == "success"){
+            setPosts(data.data)
+        }
+    }
+
+
+    const likePost = async (pid,islike) => {
+        const response = await fetch(`${auth.url}/api/like`, {
+            method: "POST",
+            mode: "cors",
+            credentials:"include",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ pid: pid, islike: islike }),
+        }).then((response) => response.json());
+
+        // update like status and count
+        if (response.status == "success") {
+            const data = response.data;
+            console.log(data)
+            const newPosts = posts.map((post) => {
+                if (post.post_id == pid) {
+                    post.islike = data.islike;
+                    post.isdislike = data.isdislike;
+                    post.lc = data.lc;
+                    post.dlc = data.dlc;
+                }
+                return post;
+            });
+            setPosts(newPosts);
+        }
+    }
+
+    useEffect(() => {
+        getPosts()
+    },[])
+
+
+
     return (
         <>
-            <main>
-                <div id="createPostContainer" className="w-full h-[8rem] py-4 my-4 flex justify-center items-center">
-                    <div id="wrapPost" className="bg-[#F6F8FA] w-full p-4 sm:w-[50%] rounded">
-                        <input type="text" className="w-full rounded my-2 p-4 h-[3rem] bg-[#F6F8FA]" placeholder="Share your thougths" />
+            <main className="bg-white dark:bg-gray-900 h-[100%]">
+                <BasicModal open={open} setOpen={setOpen}/>
+                <div id="createPostContainer" className="w-full h-[8rem] py-4 flex justify-center items-center bg-white dark:bg-gray-900 ">
+                    <div id="wrapPost" className="bg-[#F6F8FA] w-full mt-4 p-4 sm:w-[50%] rounded dark:bg-gray-800 ">
+                        <input  onClick={() => {setOpen(true)}} type="text" className="w-full rounded my-2 p-4 h-[3rem] bg-[#F6F8FA] disabled dark:bg-gray-700" placeholder="Share your thougths" />
                         <div id="postBtn" className="w-full flex justify-between pl-2 pr-4">
                             <div className="text-black ">
-                                <i className="fa-solid fa-images text-2xl"></i>
+                                <i className="fa-solid fa-images text-2xl text-black dark:text-white"></i>
                             </div>
                             <div>
-                                <button><i className="fa-solid fa-paper-plane"></i></button>
+                                <button><i className="fa-solid fa-paper-plane text-black dark:text-white"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="mainFeed" className="w-full h-auto flex justify-center">
-                    <div id="wrapFeed" className="w-full sm:w-[50%] flex justify-center bg-[#F6F8FA] rounded py-2">
+                <div id="mainFeed" className="w-full pt-8 h-auto flex flex-col items-center justify-center">
+
+
+                    {posts.map((post) => 
+                        <div id="wrapFeed" key={post.post_id} className="w-full sm:w-[50%] flex justify-center bg-[#F6F8FA] rounded py-2 mt-4 dark:bg-gray-800 text-black dark:text-white">
                         <div id="feed1 " className="flex flex-col sm:w-[98%] pr-4">
                             <div id="userDetails" className="ml-2 flex justify-between m">
                                 <div id="userImage" className="flex">
-                                    <img src="images/user.png" alt="" className="w-[4rem]" />
+                                    <img src={`${auth.url}/image/post.user_id`} alt="" className="w-[4rem]" />
                                     <div className="ml-2">
-                                        <p className="font-semibold">Samarth Bahirgonde</p>
-                                        <p>@sammy429b</p>
+                                        <p className="font-semibold">{post.fullname}</p>
+                                        <p>@{post.uname}</p>
                                     </div>
                                 </div>
                                 <div className=" mr-2">
-                                    time
+                                    {post.datetime}
                                 </div>
                             </div>
                             <div id="postContent" className="ml-20 text-justify ">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat doloremque at alias, delectus error sunt in odit id tempora culpa asperiores repellat aliquam reprehenderit dolore. Tempore facilis cum magnam deserunt.</p>
+                                <p>{
+                                    post.content_type=="text" ? post.content : <img src={post.content}/>
+                                    }</p>
 
                                 <div id="likeComment" className="w-full h-[3rem] px-4 my-1 items-center flex gap-x-6 text-[3rem]">
                                     <div id="likeCount" className=" flex gap-2">
-                                        <span className="material-symbols-outlined">thumb_up</span>
-                                        <span className="text-base">0</span>
+                                        <img onClick={() => {likePost(post.post_id,1)}} className="w-[26px] hover:cursor-pointer dark:filter dark:invert-[100%]" src={post.islike? thumb_up : thumb_up_off}/>
+                                        <span className="text-base">{post.lc}</span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span className="material-symbols-outlined pt-1">thumb_down</span>
-                                        <span className="text-base">0</span>
+                                        <img onClick={() => {likePost(post.post_id,0)}} className="w-[26px] hover:cursor-pointer dark:filter dark:invert-[100%]" src={post.isdislike? thumb_down : thumb_down_off}/>
+                                        <span className="text-base">{post.dlc}</span>
                                     </div>
 
                                 </div>
                             </div>
-                            <hr className="w-full text-"/>
                         </div>
                     </div>
+                    )}
+
+
+
+                    
+                    
                 </div>
+
+
+                
             </main>
 
 
