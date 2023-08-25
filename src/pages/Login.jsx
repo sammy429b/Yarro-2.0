@@ -1,25 +1,25 @@
-import {useContext,useState } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../context/AuthProvider";
 import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
 
-    const { auth,setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext);
     const { enqueueSnackbar } = useSnackbar();
-    const [visible,setVisible] = useState(false)
+    const [visible, setVisible] = useState(false)
     const navigate = useNavigate()
 
     const LoginForm = async function (e) {
-        document.getElementById("login_btn").setAttribute("disabled","") // 
+        document.getElementById("login_btn").setAttribute("disabled", "") // 
         e.preventDefault();
         const form = new FormData(e.target);
         const data = Object.fromEntries(form.entries());
         console.log(data);
         try {
-            const response = await fetch(`${auth.url}/api/login`, {
+            const response = await fetch(`${import.meta.env.VITE_SERVER}/api/login`, {
                 method: "POST",
                 mode: "cors",
-                credentials:"include",
+                credentials: "include",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -33,7 +33,6 @@ const Login = () => {
             console.log(responseData);
             if (status === "success") {
                 setAuth({
-                    ...auth,
                     login: true,
                     uid: responseData.uid,
                     uname: responseData.uname,
@@ -53,15 +52,15 @@ const Login = () => {
             }
         } catch (err) {
             console.log(err);
-                enqueueSnackbar("network error", {
-                    variant: "error",
-                    sx: {
-                        "& .SnackbarContent-root": {
-                            width: 100,
-                            fontSize: 16,
-                        },
+            enqueueSnackbar("network error", {
+                variant: "error",
+                sx: {
+                    "& .SnackbarContent-root": {
+                        width: 100,
+                        fontSize: 16,
                     },
-                });
+                },
+            });
         }
         document.getElementById("login_btn").removeAttribute("disabled") // 
     };
@@ -71,7 +70,7 @@ const Login = () => {
         <>
             <div
                 id="form-container"
-                className="w-full h-[100vh] flex items-start justify-center px-8 pt-36 border-black bg-white dark:bg-gray-900 dark:border-gray-900"
+                className="w-full h-[100vh] flex items-start justify-center px-8 pt-16 border-black bg-white dark:bg-gray-900 dark:border-gray-900"
             >
                 <form
                     id="login_form"
@@ -97,16 +96,16 @@ const Login = () => {
                     >
                         <input
                             className="h-10 border-none w-full outline-none text-black bg-white dark:text-white dark:bg-[#3b4148]"
-                            type={visible ?"text":"password"}
+                            type={visible ? "text" : "password"}
                             name="passwd"
                             placeholder="Password"
                             id="passwd"
                         />
                         <label
-                            onClick={()=>{setVisible(!visible)}}
+                            onClick={() => { setVisible(!visible) }}
                             className="material-symbols-outlined select-none hover:cursor-pointer text-black dark:text-white"
                         >
-                           {visible?"visibility_off":"visibility"}
+                            {visible ? "visibility_off" : "visibility"}
                         </label>
                     </div>
                     <Link
