@@ -1,5 +1,5 @@
 import Index from "./pages/Index"
-import Confirmemail from "./pages/ConfirmEmail"
+import Confirmemail from "./pages/Confirmemail"
 import Editprofile from "./pages/Editprofile"
 import Main from "./pages/Main"
 import Forgotpass from "./pages/ForgotPassword"
