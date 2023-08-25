@@ -4,13 +4,17 @@ import AuthContext from "../context/AuthProvider"
 
 const Navbar = ({ theme,toggleTheme }) => {
 
-    const link = [{ "name": "Home", "icon": "home", "link": "/" },
-    { "name": "Search", "icon": "search", "link": "/search" }]
+    const link = [
+        { "name": "Home", "icon": "home", "link": "/" },
+        { "name": "Search", "icon": "search", "link": "/search" },
+        { "name": "Chat", "icon": "chat", "link": "/chat" }
+
+]
 
     const {auth,setAuth} = useContext(AuthContext)
 
     const Logout = async () => {
-        fetch(`${auth.url}/api/logout`, {
+        fetch(`${import.meta.env.VITE_SERVER}/api/logout`, {
             method: 'POST',
             mode: 'cors',
             credentials:"include",
@@ -49,7 +53,7 @@ const Navbar = ({ theme,toggleTheme }) => {
                     {auth.login ?
                         <div className="relative inline-block group/nav ">
                             <div className="profile-container pt-4 pr-8 min-w-[50px] max-w-[50px] min-h-[50px] mr-4">
-                                <img id="profile-img" src="" alt="pfp" className="min-w-[50px] h-[50px] rounded-full select-none" />
+                                <img id="profile-img" src={`${import.meta.env.VITE_SERVER}/image/${auth.uid}`} alt="pfp" className="min-w-[50px] h-[50px] rounded-full select-none" />
                             </div>
                             <div
                                 className="navs group-hover/nav:block absolute hidden w-36 right-1 z-1 shadow-xl group-data-[checked=true]:text-white">

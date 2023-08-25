@@ -1,5 +1,5 @@
 import Index from "./pages/Index"
-import Confirmemail from "./pages/ConfirmEmail"
+import Confirmemail from "./pages/Confirmemail"
 import Editprofile from "./pages/Editprofile"
 import Main from "./pages/Main"
 import Forgotpass from "./pages/ForgotPassword"
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className={
-      theme ? "dark":""
+      theme ? "dark h-[100%] min-h-[100%]":"h-[100%] min-h-[100%]"
     }>
       {/* <Navbar login={auth.login} /> */}
       <Navbar theme={theme} toggleTheme={toggleTheme}/>
