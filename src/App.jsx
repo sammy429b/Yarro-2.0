@@ -31,7 +31,7 @@ function App() {
       {/* <Navbar login={auth.login} /> */}
       <Navbar theme={theme} toggleTheme={toggleTheme}/>
 
-      {auth.login
+      {!auth.login
         ?// auth = true i.e user is logged in
         <Routes>
           <Route path="/" element={<Main />} />
