@@ -14,7 +14,6 @@ const Login = () => {
         e.preventDefault();
         const form = new FormData(e.target);
         const data = Object.fromEntries(form.entries());
-        console.log(data);
         try {
             const response = await fetch(`${import.meta.env.VITE_SERVER}/api/login`, {
                 method: "POST",
@@ -30,7 +29,6 @@ const Login = () => {
             const responseData = await response.json();
 
             const status = responseData.status;
-            console.log(responseData);
             if (status === "success") {
                 setAuth({
                     login: true,

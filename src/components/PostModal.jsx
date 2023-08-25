@@ -34,7 +34,7 @@ export default function PostModal({open,setOpen}) {
        contentLabel="New Post"
       >
         <div className="w-[400px] flex flex-col items-center">
-        <p ref={(_subtitle) => (subtitle = _subtitle)} className='w-64 text-xl text-center'>Create new post</p>
+        <p ref={(_subtitle) => (subtitle = _subtitle)} className='w-64 text-xl text-center text-bold'>Create new post</p>
 
 
 
