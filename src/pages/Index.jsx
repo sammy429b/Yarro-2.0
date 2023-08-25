@@ -4,8 +4,10 @@ import {Typewriter} from 'react-simple-typewriter'
 const NewIndex = () => {
   return (
     <>
+
       <div id="mainConatiner" className="flex flex-col-reverse md:flex-row items-start pt-16 justify-start bg-white h-screen dark:bg-gray-900">
         <div id="leftContainer" className='flex flex-col justify-center pl-8 gap-y-3 w-full lg:h-[100%] lg:w-1/2 '>
+
           <h2 className='flex gap-x-2 w-[82%] lg:w-full text-[2rem] lg:text-5xl text-4xl font-semibold text-black dark:text-white'>
             <p className='text-blue-400'>Make connections </p>
             <Typewriter words={[" with Friends", " with People"]} loop={false} cursor

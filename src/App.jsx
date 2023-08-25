@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className={
-      theme ? "dark":""
+      theme ? "dark h-[100%] min-h-[100%]":"h-[100%] min-h-[100%]"
     }>
       {/* <Navbar login={auth.login} /> */}
       <Navbar theme={theme} toggleTheme={toggleTheme}/>
