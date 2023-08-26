@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 const AuthContext = createContext({ login: false, uid: '', uname: '' });
 
 export function AuthProvider({ children }) {
-    const [auth, setAuth] = useState({ login: false, uid: '', uname: '' });
+    const [auth, setAuth] = useState({ login: true, uid: '', uname: '' });
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         const CheckLogin = async () => {
