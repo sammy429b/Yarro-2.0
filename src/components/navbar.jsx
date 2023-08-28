@@ -2,30 +2,32 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 import AuthContext from "../context/AuthProvider"
 
-const Navbar = ({ theme,toggleTheme }) => {
+const Navbar = ({ theme, toggleTheme }) => {
 
     const link = [
         { "name": "Home", "icon": "home", "link": "/" },
         { "name": "Search", "icon": "search", "link": "/search" },
         { "name": "Chat", "icon": "chat", "link": "/chat" }
 
-]
+    ]
 
-    const {auth,setAuth} = useContext(AuthContext)
+    const { auth, setAuth } = useContext(AuthContext)
 
     const Logout = async () => {
-        fetch(`${import.meta.env.VITE_SERVER}/api/logout`, {
+        const response = await fetch(`${import.meta.env.VITE_SERVER}/api/logout`, {
             method: 'POST',
             mode: 'cors',
-            credentials:"include",
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }).then((response) => response.json())
-
-        setAuth({...auth, "login":false, uid: '', uname: ''})
-        document.cookie = ""
+        if (response.status === "success") {
+            setAuth({ ...auth, "login": false, uid: '', uname: '' });
+            document.cookie = "";
+            window.location.href = '/';
+        }
     }
 
     const nav_links = link.map((link) =>
@@ -77,7 +79,7 @@ const Navbar = ({ theme,toggleTheme }) => {
                         <label htmlFor="theme" className="">
                             <span id="theme_button" onClick={toggleTheme}
                                 className="material-symbols-outlined pt-1 px-4 text-4xl text-black dark:text-white select-none hover:cursor-pointer">
-                                {theme?"light_mode":"dark_mode"}
+                                {theme ? "light_mode" : "dark_mode"}
                             </span>
                         </label>
                     </div>

@@ -5,13 +5,14 @@ import thumb_up from "../assets/thumb_up.svg"
 import thumb_down from "../assets/thumb_down.svg"
 import thumb_down_off from "../assets/thumb_down_off.svg"
 import BasicModal from "../components/PostModal"
+import { useSnackbar } from "notistack"
 
 
 const Main = () => {
 
     const [posts, setPosts] = useState([])
     const { auth } = useContext(AuthContext)
-
+    const { enqueueSnackber } = useSnackbar();
     const [open, setOpen] = useState(false);
 
 
@@ -64,6 +65,37 @@ const Main = () => {
         }
     }
 
+    const CreatePost = async (e) => {
+        try {
+            e.preventDefault();
+            const form = new FormData(e.target);
+            const data = Object.fromEntries(form.entries());
+            document.getElementById('post-text').disabled = true;
+            const response = await fetch(`${import.meta.env.VITE_SERVER}/api/posts`, {
+                mode: 'cors',
+                method: 'POST',
+                'credentials': 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({ content: data.postText })
+            }).then(response => response.json());
+
+            if (response.status === "success") {
+                getPosts();
+            }
+            else {
+                enqueueSnackber(response.status, { varient: 'info' });
+            }
+            document.getElementById('post-text').disabled = false;
+            setOpen(false);
+        }
+        catch(err){
+            enqueueSnackber('Failed to process request', { varient: 'info' });
+        }
+    }
+
     useEffect(() => {
         getPosts()
     }, [])
@@ -73,10 +105,10 @@ const Main = () => {
     return (
         <>
             <main className="bg-white dark:bg-gray-900 h-[100%]">
-                <BasicModal open={open} setOpen={setOpen} />
+                <BasicModal open={open} setOpen={setOpen} textPost={CreatePost} />
                 <div id="createPostContainer" className="w-full h-[8rem] py-4 flex justify-center items-center bg-white dark:bg-gray-900 ">
                     <div id="wrapPost" className="bg-[#F6F8FA] w-full mt-4 p-4 sm:w-[50%] dark:bg-gray-800">
-                        <input onClick={() => { setOpen(true) }} type="text" className="outline-none w-full rounded my-2 p-4 h-[3rem] bg-[#F6F8FA] disabled dark:bg-gray-700" placeholder="Share your thougths" />
+                        <button type='button' onClick={() => setOpen(true)} id="start-post" className="outline-none w-full text-start px-4 cursor-text rounded my-2 h-[3rem] bg-[#EEEEEE] dark:bg-gray-700 dark:text-gray-400">Share your thougths</button>
                         <div id="postBtn" className="w-full flex justify-between pl-2 pr-4">
                             <div className="text-black ">
                                 <i className="fa-solid fa-images text-2xl text-black dark:text-white"></i>
@@ -127,7 +159,7 @@ const Main = () => {
                         </div>
                     )}
                 </div>
-            </main>
+            </main >
         </>
     )
 }
