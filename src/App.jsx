@@ -11,25 +11,34 @@ import Navbar from "./components/navbar"
 import Login from "./pages/Login"
 
 import { Route, Routes } from "react-router-dom"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "./context/AuthProvider"
 
 function App() {
   const { auth } = useContext(AuthContext);
 
-  const [theme,setTheme] = useState(localStorage.getItem("theme") == "true"?true:false)
+  const [theme, setTheme] = useState(localStorage.getItem("theme") === "true" ? true : false)
 
   const toggleTheme = () => {
-      setTheme(!theme)
-      localStorage.setItem("theme",!theme)
+    setTheme(!theme)
+    localStorage.setItem("theme", !theme)
   }
+
+  useEffect(() => {
+    if (theme) {
+      document.getElementsByTagName("meta")["color-scheme"].content = 'dark';
+    }
+    else {
+      document.getElementsByTagName('meta')["color-scheme"].content = 'light';
+    }
+  }, []);
 
   return (
     <div className={
-      theme ? "dark h-[100%] min-h-[100%]":"h-[100%] min-h-[100%]"
+      theme ? "dark min-h-[100%]" : "min-h-[100%]"
     }>
       {/* <Navbar login={auth.login} /> */}
-      <Navbar theme={theme} toggleTheme={toggleTheme}/>
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
 
       {auth.login
         ?// auth = true i.e user is logged in

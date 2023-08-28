@@ -17,14 +17,9 @@ Modal.setAppElement('#root');
 export default function PostModal({ open, setOpen, textPost }) {
   let subtitle;
 
-  const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    // document.getElementById('create-post').
-    console.log(document.getElementById('postText').value)
     setOpen(false);
   };
-
-
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
@@ -39,8 +34,8 @@ export default function PostModal({ open, setOpen, textPost }) {
       style={customStyles}
       contentLabel="New Post"
     >
-      <div className="w-[600px] h-[20rem] flex flex-col items-center">
-        <div className='w-full  flex items-center justify-between'>
+      <div className="w-[600px] h-[20rem] flex flex-col items-cente dark:bg-[#202020]">
+        <div className='w-full  flex items-center justify-between dark:bg-[#121212]'>
           <p ref={(_subtitle) => (subtitle = _subtitle)} className='w text-xl text-center text-bold'>Create new post</p>
           <button onClick={handleClose} className='font-semibold text-xl'>
             <i className='fa fa-close'></i>
