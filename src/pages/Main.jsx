@@ -19,19 +19,20 @@ const Main = () => {
 
 
     const getPosts = async () => {
-        const response = await fetch(`${import.meta.env.VITE_SERVER}/api/posts?page=0`, {
+        const response = await fetch(`${import.meta.env.VITE_SERVER}/api/posts?page=1`, {
             method: "GET",
             mode: "cors",
             credentials: "include",
             headers: {
-                Accept: "application/json",
+                'Accept': "application/json",
                 "Content-Type": "application/json",
             },
         });
 
         const data = await response.json()
         if (data.status == "success") {
-            setPosts(data.data.reverse())
+            console.log(data.data)
+            setPosts(data.data)
         }
     }
 
@@ -83,7 +84,8 @@ const Main = () => {
             }).then(response => response.json());
 
             if (response.status === "success") {
-                getPosts();
+                console.log(posts)
+                await getPosts();
             }
             else {
                 enqueueSnackber(response.status, { varient: 'info' });
@@ -104,9 +106,9 @@ const Main = () => {
 
     return (
         <>
-            <main className="bg-white dark:bg-[#121212] h-[100%]">
+            <main className="bg-white dark:bg-[#181818] h-[100%]">
                 <BasicModal open={open} setOpen={setOpen} textPost={CreatePost} />
-                <div id="createPostContainer" className="w-full h-[8rem] py-4 flex justify-center items-center bg-white dark:bg-[#121212] ">
+                <div id="createPostContainer" className="w-full h-[8rem] py-4 flex justify-center items-center bg-white dark:bg-[#181818] ">
                     <div id="wrapPost" className="bg-[#F6F8FA] w-full mt-4 p-4 sm:w-[50%] dark:bg-[#202020]">
                         <button type='button' onClick={() => setOpen(true)} id="start-post" className="outline-none w-full text-start px-4 hover:dark:bg-[#3a3a3a] rounded my-2 h-[3rem] bg-[#EEEEEE] dark:bg-[#303030] dark:text-gray-400">Share your thougths</button>
                         <div id="postBtn" className="w-full flex justify-between pl-2 pr-4">
@@ -129,7 +131,7 @@ const Main = () => {
                                         <img src={`${import.meta.env.VITE_SERVER}/image/${post.uid}`} alt="" className="w-[4rem]" />
                                         <div className="ml-2">
                                             <p className="font-semibold">{post.fullname}</p>
-                                            <p className="dark:text-yellow-400">@{post.uname}</p>
+                                            <p className="dark:text-[#b2b2b2] text-[#626262] font-medium">@{post.uname}</p>
                                         </div>
                                     </div>
                                     <div className=" mr-2">

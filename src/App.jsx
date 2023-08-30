@@ -24,18 +24,9 @@ function App() {
     localStorage.setItem("theme", !theme)
   }
 
-  useEffect(() => {
-    if (theme) {
-      document.getElementsByTagName("meta")["color-scheme"].content = 'dark';
-    }
-    else {
-      document.getElementsByTagName('meta')["color-scheme"].content = 'light';
-    }
-  }, []);
-
   return (
     <div className={
-      theme ? "dark min-h-[100%]" : "min-h-[100%]"
+      theme ? "dark min-h-[100vh]" : "min-h-[100vh]"
     }>
       {/* <Navbar login={auth.login} /> */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />

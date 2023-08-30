@@ -30,32 +30,34 @@ const Navbar = ({ theme, toggleTheme }) => {
         }
     }
 
+
     const nav_links = link.map((link) =>
-        <Link key={link.name} to={link.link} className="hover:cursor-pointer text-black justify-center items-center dark:text-white">
-            <p className="material-symbols-outlined mx-2 text-2xl select-none text-black dark:text-white" id="homebtn">{link.icon}</p>
-            <p className="select-none text-center">{link.name}</p>
+        <Link key={link.name} to={link.link} className="hover:cursor-pointer flex flex-col w-12 h-14 md:w-16 md:h-16 text-sm md:text-md  text-black justify-center items-center dark:text-white bg-purple-400 dark:bg-purple-500 rounded-xl">
+            <div className="material-symbols-outlined text-2xl select-none text-black dark:text-white" id="homebtn">{link.icon}</div>
+            <div className="select-none text-center">{link.name}</div>
         </Link>
     )
 
+
     return (
 
-        <div id="Nav" className="w-full bg-gray-100 h-[5rem] text-black flex items-center justify-between dark:bg-[#1a1a1a]">
+        <div id="Nav" className="w-full bg-gray-100 h-[5rem] text-black flex items-center justify-between dark:bg-[#1a1a1a] border-b-[0.1rem] border-b-purple-400 dark:border-b-purple-900">
             <Link to={'/'} id="Logo" className="flex flex-row gap-x-1 items-center ml-4 text-2xl font-medium font-sans">
                 <img src="images/logo.png" alt="" className="w-[2rem] justify-center items-center" />
                 <h1 className="text-black dark:text-white">Yarro</h1>
             </Link>
             {auth.login &&
-                <div className="flex gap-x-8">
+                <div className="flex flex-row gap-x-2 md:gap-x-4 justify-center items-center">
                     {
                         nav_links
                     }
                 </div>
             }
-            <div id="Nav-btns" className="flex justify-center gap-x-4 items-center  w-[16rem] h-[4rem] ">
+            <div id="Nav-btns" className="flex gap-x-2 md:gap-x-4 items-center justify-center mr-2">
                 {auth.login ?
                     <div className="relative inline-block group/nav ">
-                        <div className="profile-container pr-8 min-w-[50px] max-w-[50px] min-h-[50px] mr-4">
-                            <img id="profile-img" src={`${import.meta.env.VITE_SERVER}/image/${auth.uid}`} alt="pfp" className="min-w-[50px] h-[50px] rounded-full select-none" />
+                        <div className="profile-container">
+                            <img id="profile-img" src={`${import.meta.env.VITE_SERVER}/image/${auth.uid}`} alt="pfp" className="w-[40px] md:w-[50px] rounded-full select-none" />
                         </div>
                         <div
                             className="navs group-hover/nav:block absolute hidden w-36 right-1 z-9 shadow-xl group-data-[checked=true]:text-white">
@@ -78,7 +80,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 <div>
                     <label htmlFor="theme" className="">
                         <span id="theme_button" onClick={toggleTheme}
-                            className="material-symbols-outlined px-4 text-4xl text-black dark:text-white select-none hover:cursor-pointer">
+                            className="material-symbols-outlined text-3xl md:text-4xl text-black dark:text-white select-none hover:cursor-pointer">
                             {theme ? "light_mode" : "dark_mode"}
                         </span>
                     </label>
