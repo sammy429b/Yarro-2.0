@@ -72,7 +72,7 @@ const Login = () => {
             >
                 <form
                     id="login_form"
-                    className=" shadow-2xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col lg:w-[36rem] w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 dark:bg-[#202020]"
+                    className=" shadow-xl bg-white rounded-[1.5rem] flex gap-y-2 flex-col lg:w-[33rem] w-[32rem] lg:h-[30rem] p-6 transition-[width] duration-500 dark:bg-[#202020]"
                     onSubmit={LoginForm}
                 >
                     <div className="phrase-container flex justify-center">

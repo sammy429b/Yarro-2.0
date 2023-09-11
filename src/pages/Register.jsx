@@ -60,7 +60,7 @@ const Register = () => {
             <main className="h-[100vh] items-start pt-16 flex justify-center bg-white dark:bg-[#121212]">
                 <div className=" flex flex-row justify-center items-center">
                     <div id="form-container"
-                        className="rounded-[3rem] lg:w-[36rem] w-[32rem] flex items-center justify-center border-white bg-white shadow-xl dark:bg-[#202020]">
+                        className="rounded-[1.5rem] lg:w-[34rem] w-[32rem] flex items-center justify-center border-white bg-white shadow-xl dark:bg-[#202020]">
                         <form id="reg_form" onSubmit={onRegister}
                             className=" rounded-[1.5rem] flex items-center flex-col gap-y-4 transition-[width] bg-white duration-500 dark:bg-[#202020]">
                             <div id="phrase-container" className=" flex my-6">
@@ -84,15 +84,15 @@ const Register = () => {
                                 className="w-[27rem] lg:w-[29rem] mt-2 rounded-full h-10 text-white flex items-center justify-center bg-purple-500 hover:bg-purple-600 dark:bg-purple-800 hover:dark:bg-purple-700 duration-300 hover:cursor-pointer disabled:bg-gray-900"
                                 type="submit" name="reg" id="reg" value="Register" />
                             <Link to="/login"
-                                className="underline-animation pb-4 flex justify-center mt-4 dark:text-white text-black hover:underline duration-300 translate-y-1 hover:translate-y-0">
+                                className="underline-animation pb-6 flex justify-center mt-4 dark:text-white text-black hover:underline duration-300 translate-y-1 hover:translate-y-0">
                                 Login instead?
                             </Link>
                         </form>
                     </div>
 
-                    <div id="image-container" className="w-1/2 hidden lg:flex items-center justify-center">
+                    {/* <div id="image-container" className="w-1/2 hidden lg:flex items-center justify-center">
                         <img src="images/reg.png" alt="someimg" className="w-[35.5rem] " />
-                    </div>
+                    </div> */}
                 </div>
             </main>
         </>

@@ -6,7 +6,14 @@ const Editprofile = () => {
                 <div className="profile flex flex-col items-center w-[50%] border-2 ">
 
                     <div className="user_profile flex flex-col items-center">
-                        <img src="" alt="" id="user_image" className=" min-w-[120px] max-w-[120px] h-[120px] rounded-full" />
+                        <div class="text-center">
+                            <img
+                                src="https://tecdn.b-cdn.net/img/new/avatars/5.webp"
+                                class="mx-auto mb-4 w-32 rounded-lg"
+                                alt="Avatar" />
+                            <h5 class="mb-2 text-xl font-medium leading-tight">John Doe</h5>
+                            <p class="text-neutral-500 dark:text-neutral-400">Web designer</p>
+                        </div>
                         <form id="image_form" method="POST" encType="multipart/form-data" action="/sendimage">
                             <label htmlFor="image_upload" className="cursor-pointer">change profile picture</label>
                             <input type="file" id="image_upload" name="image" accept="image/*" className="w-0 h-0" />

@@ -41,7 +41,7 @@ const Navbar = ({ theme, toggleTheme }) => {
 
     return (
 
-        <div id="Nav" className="w-full bg-gray-100 h-[5rem] text-black flex items-center justify-between dark:bg-[#1a1a1a] border-b-[0.1rem] border-b-purple-400 dark:border-b-purple-900">
+        <div id="Nav" className="w-full bg-gray-100 h-[5rem] text-black flex items-center justify-between dark:bg-[#1a1a1a] border-none border-b-purple-400 dark:border-b-purple-900">
             <Link to={'/'} id="Logo" className="flex flex-row gap-x-1 items-center ml-4 text-2xl font-medium font-sans">
                 <img src="images/logo.png" alt="" className="w-[2rem] justify-center items-center" />
                 <h1 className="text-black dark:text-white">Yarro</h1>
@@ -73,8 +73,8 @@ const Navbar = ({ theme, toggleTheme }) => {
                     </div>
                     :
                     <>
-                        <Link className="w-[10rem] h-[2.6rem] bg-purple-600 text-white rounded border-none outline-none text-center pt-[0.4rem] dark:bg-purple-800" to="/login">Log In</Link>
-                        <Link className="w-[10rem] h-[2.6rem] text-purple-600 border-purple-500 border-2 rounded outline-none text-center pt-[0.3rem] dark:border-purple-800" to="/register">Sign Up</Link>
+                        <Link className="w-[8rem] h-[2.6rem] bg-purple-600 hover:bg-purple-500 text-white rounded-[.3rem] border-none outline-none text-center pt-[0.4rem] dark:bg-purple-800 duration-200" to="/login">Log In</Link>
+                        <Link className="w-[8rem] h-[2.6rem] text-purple-600 border-purple-500 border-2 rounded-[.3rem] outline-none text-center pt-[0.3rem] dark:border-purple-800 duration-200" to="/register">Sign Up</Link>
                     </>
                 }
                 <div>

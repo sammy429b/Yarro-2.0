@@ -13,6 +13,7 @@ import Login from "./pages/Login"
 import { Route, Routes } from "react-router-dom"
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "./context/AuthProvider"
+import Chat from "./pages/Chat"
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -31,11 +32,12 @@ function App() {
       {/* <Navbar login={auth.login} /> */}
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      {auth.login
+      {!auth.login
         ?// auth = true i.e user is logged in
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<Userprofile />} />
           <Route path="/profile/edit" element={<Editprofile />} />
         </Routes>
